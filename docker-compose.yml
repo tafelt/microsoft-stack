@@ -4,17 +4,41 @@ services:
     container_name: ${PROJECT}-server
     platform: ${BUILD_PLATFORM}
     image: mcr.microsoft.com/devcontainers/dotnet:0-${DOTNET_VARIANT}
+    depends_on:
+      - mssql
     volumes:
       - ./server/:/usr/src/server
     ports:
       - ${DOTNET_PORT}:${DOTNET_PORT}
     networks:
       - api-gateway
+      - mssql-connection
     environment:
       - DOTNET_PORT=${DOTNET_PORT}
       - DOTNET_URLS=${DOTNET_URLS}
     command: sleep infinity
+  mssql:
+    container_name: ${PROJECT}-mssql
+    platform: ${BUILD_PLATFORM}
+    image: mcr.microsoft.com/mssql/server:${MSSQL_VARIANT}
+    restart: unless-stopped
+    volumes:
+      - mssql-data:/var/opt/mssql
+    ports:
+      - ${MSSQL_TCP_PORT}:${MSSQL_TCP_PORT}
+    networks:
+      - mssql-connection
+    environment:
+      - ACCEPT_EULA=${MSSQL_ACCEPT_EULA}
+      - MSSQL_PID=${MSSQL_PID}
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
+      - MSSQL_TCP_PORT=${MSSQL_TCP_PORT}
 networks:
   api-gateway:
     name: ${PROJECT}-api-gateway
     driver: bridge
+  mssql-connection:
+    name: ${PROJECT}-mssql-connection
+    driver: bridge
+volumes:
+  mssql-data:

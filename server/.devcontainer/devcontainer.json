@@ -14,7 +14,8 @@
 			"extensions": [
 				"ms-dotnettools.csdevkit",
 				"ms-dotnettools.vscodeintellicode-csharp",
-				"csharpier.csharpier-vscode"
+				"csharpier.csharpier-vscode",
+				"ms-mssql.mssql"
 			]
 		}
 	}
