@@ -1,0 +1,21 @@
+{
+	"name": ".NET Core",
+	"service": "server",
+	"dockerComposeFile": "../../docker-compose.yml",
+	"workspaceFolder": "/usr/src/server",
+	"shutdownAction": "stopCompose",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"[csharp]": {
+					"editor.formatOnSave": true
+				}
+			},
+			"extensions": [
+				"ms-dotnettools.csdevkit",
+				"ms-dotnettools.vscodeintellicode-csharp",
+				"csharpier.csharpier-vscode"
+			]
+		}
+	}
+}

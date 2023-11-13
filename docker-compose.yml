@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  server:
+    container_name: ${PROJECT}-server
+    platform: ${BUILD_PLATFORM}
+    image: mcr.microsoft.com/devcontainers/dotnet:0-${DOTNET_VARIANT}
+    volumes:
+      - ./server/:/usr/src/server
+    ports:
+      - ${DOTNET_PORT}:${DOTNET_PORT}
+    networks:
+      - api-gateway
+    environment:
+      - DOTNET_PORT=${DOTNET_PORT}
+      - DOTNET_URLS=${DOTNET_URLS}
+    command: sleep infinity
+networks:
+  api-gateway:
+    name: ${PROJECT}-api-gateway
+    driver: bridge
