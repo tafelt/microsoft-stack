@@ -5,8 +5,8 @@ services:
     platform: ${BUILD_PLATFORM}
     image: mcr.microsoft.com/devcontainers/dotnet:0-${DOTNET_VARIANT}
     depends_on:
-      mssql:
-        condition: service_healthy
+      mssql-migration:
+        condition: service_completed_successfully
     volumes:
       - ./server/:/usr/src/server
     ports:
@@ -40,6 +40,15 @@ services:
       - MSSQL_PID=${MSSQL_PID}
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
       - MSSQL_TCP_PORT=${MSSQL_TCP_PORT}
+  mssql-migration:
+    container_name: ${PROJECT}-mssql-migration
+    platform: ${BUILD_PLATFORM}
+    image: mcr.microsoft.com/devcontainers/dotnet:0-${DOTNET_VARIANT}
+    depends_on:
+      mssql:
+        condition: service_healthy
+    networks:
+      - mssql-connection
 networks:
   api-gateway:
     name: ${PROJECT}-api-gateway
