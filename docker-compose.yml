@@ -5,7 +5,8 @@ services:
     platform: ${BUILD_PLATFORM}
     image: mcr.microsoft.com/devcontainers/dotnet:0-${DOTNET_VARIANT}
     depends_on:
-      - mssql
+      mssql:
+        condition: service_healthy
     volumes:
       - ./server/:/usr/src/server
     ports:
@@ -22,6 +23,12 @@ services:
     platform: ${BUILD_PLATFORM}
     image: mcr.microsoft.com/mssql/server:${MSSQL_VARIANT}
     restart: unless-stopped
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" || exit 1
+      interval: 10ms
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     volumes:
       - mssql-data:/var/opt/mssql
     ports:
