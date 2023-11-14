@@ -20,7 +20,8 @@ services:
     command: sleep infinity
   mssql:
     container_name: ${PROJECT}-mssql
-    platform: ${BUILD_PLATFORM}
+    # NOTE: Image is not available for linux/arm64/v8, enable rosetta for x86/amd64 emulation on apple silicon in docker settings
+    platform: linux/amd64
     image: mcr.microsoft.com/mssql/server:${MSSQL_VARIANT}
     restart: unless-stopped
     healthcheck:
