@@ -5,8 +5,8 @@ services:
     platform: ${BUILD_PLATFORM}
     image: mcr.microsoft.com/devcontainers/dotnet:0-${DOTNET_VARIANT}
     depends_on:
-      mssql-migration:
-        condition: service_completed_successfully
+      mssql:
+        condition: service_healthy
     volumes:
       - ./server/:/usr/src/server
     ports:
@@ -48,8 +48,11 @@ services:
     depends_on:
       mssql:
         condition: service_healthy
+    volumes:
+      - ./database/:/usr/src/database
     networks:
       - mssql-connection
+    command: sleep infinity
 networks:
   api-gateway:
     name: ${PROJECT}-api-gateway

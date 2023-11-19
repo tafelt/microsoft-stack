@@ -1,9 +1,10 @@
 {
-  "name": ".NET Core Web API",
-  "service": "server",
+  "name": "MSSQL Migration",
+  "service": "mssql-migration",
   "dockerComposeFile": "../../docker-compose.yml",
-  "workspaceFolder": "/usr/src/server",
+  "workspaceFolder": "/usr/src/database",
   "shutdownAction": "none",
+  "postStartCommand": "./entrypoint.sh",
   "customizations": {
     "vscode": {
       "settings": {
@@ -14,8 +15,7 @@
       "extensions": [
         "ms-dotnettools.csdevkit",
         "ms-dotnettools.vscodeintellicode-csharp",
-        "csharpier.csharpier-vscode",
-        "ms-mssql.mssql"
+        "csharpier.csharpier-vscode"
       ]
     }
   }
