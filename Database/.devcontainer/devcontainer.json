@@ -5,6 +5,9 @@
   "workspaceFolder": "/usr/src/Database",
   "shutdownAction": "none",
   "postStartCommand": "./entrypoint.sh",
+  "remoteEnv": {
+    "MSSQL_SA_PASSWORD": "${containerEnv:MSSQL_SA_PASSWORD}"
+  },
   "customizations": {
     "vscode": {
       "settings": {

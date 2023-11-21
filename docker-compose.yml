@@ -52,6 +52,8 @@ services:
       - ./Database/:/usr/src/Database
     networks:
       - mssql-connection
+    environment:
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
     command: sleep infinity
 networks:
   api-gateway:
