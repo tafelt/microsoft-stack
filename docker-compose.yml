@@ -49,7 +49,7 @@ services:
       mssql:
         condition: service_healthy
     volumes:
-      - ./database/:/usr/src/database
+      - ./Database/:/usr/src/Database
     networks:
       - mssql-connection
     command: sleep infinity
