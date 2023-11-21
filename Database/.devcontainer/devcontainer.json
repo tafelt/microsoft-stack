@@ -16,6 +16,10 @@
         "[csharp]": {
           "editor.defaultFormatter": "csharpier.csharpier-vscode",
           "editor.formatOnSaveMode": "file"
+        },
+        "files.exclude": {
+          "**/bin": true,
+          "**/obj": true
         }
       },
       "extensions": [
