@@ -1,0 +1,29 @@
+{
+  "name": "App API",
+  "service": "server",
+  "dockerComposeFile": "../../docker-compose.yml",
+  "workspaceFolder": "/usr/src/Server",
+  "shutdownAction": "none",
+  "remoteEnv": {
+    "DOTNET_PORT": "${containerEnv:DOTNET_PORT}",
+    "DOTNET_URLS": "${containerEnv:DOTNET_URLS}"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "modifications",
+        "[csharp]": {
+          "editor.defaultFormatter": "csharpier.csharpier-vscode",
+          "editor.formatOnSaveMode": "file"
+        }
+      },
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.vscodeintellicode-csharp",
+        "csharpier.csharpier-vscode",
+        "ms-mssql.mssql"
+      ]
+    }
+  }
+}
