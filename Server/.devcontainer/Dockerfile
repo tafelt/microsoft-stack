@@ -5,3 +5,4 @@ WORKDIR /usr/src/Server
 COPY --chown=vscode:vscode . .
 
 ENTRYPOINT ["./entrypoint.sh"]
+CMD ["sleep", "infinity"]

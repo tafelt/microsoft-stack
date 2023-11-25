@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
 
 export DATA_SOURCE="mssql"
 export APP_DATABASE="appdb"
@@ -26,4 +26,4 @@ dotnet run \
   --baseConnectionString="$APP_TEST_CONNECTION_STRING" \
   --database="$APP_TEST_DATABASE"
 
-sleep infinity
+exec "$@"
