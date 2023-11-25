@@ -25,3 +25,5 @@ dotnet run \
   --systemConnectionString="$SYSTEM_CONNECTION_STRING" \
   --baseConnectionString="$APP_TEST_CONNECTION_STRING" \
   --database="$APP_TEST_DATABASE"
+
+sleep infinity

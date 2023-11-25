@@ -4,7 +4,6 @@
   "dockerComposeFile": "../../docker-compose.yml",
   "workspaceFolder": "/usr/src/Database",
   "shutdownAction": "none",
-  "postStartCommand": "./entrypoint.sh",
   "remoteEnv": {
     "MSSQL_SA_PASSWORD": "${containerEnv:MSSQL_SA_PASSWORD}"
   },
@@ -23,6 +22,7 @@
         }
       },
       "extensions": [
+        "ms-azuretools.vscode-docker",
         "ms-dotnettools.csdevkit",
         "ms-dotnettools.vscodeintellicode-csharp",
         "csharpier.csharpier-vscode",
