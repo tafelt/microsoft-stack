@@ -17,11 +17,11 @@ This project presents the use of Microsoft technologies in VS Code `devcontainer
   - For MacOS users only
     - Settings > General > Use Virtualization framework > VirtioFS
     - Settings > General > Use Rosetta for x86/AMD64 emulation on Apple Silicon
+- Read the FAQ section if you're not familiar with connecting a remote container via VS Code
+- Read the known issues section
 
 ## Getting Started
 
-- Read the known issues section
-- Read the FAQ section if you're not familiar with connecting a remote container via VS Code
 - Clone the project to the desired location
   - For better performance, Windows users should clone the repo under WSL `\\wsl$\Ubuntu-22.04\home\<username>\<folder>\`
 - Create an `.env` file at the root of the project based on the `.env.example` file
