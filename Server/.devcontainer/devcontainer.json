@@ -11,6 +11,7 @@
   "customizations": {
     "vscode": {
       "settings": {
+        "files.eol": "\n",
         "editor.formatOnSave": true,
         "editor.formatOnSaveMode": "modifications",
         "[csharp]": {
