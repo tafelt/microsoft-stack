@@ -7,7 +7,8 @@
   "overrideCommand": false,
   "remoteEnv": {
     "DOTNET_PORT": "${containerEnv:DOTNET_PORT}",
-    "DOTNET_URLS": "${containerEnv:DOTNET_URLS}"
+    "DOTNET_URLS": "${containerEnv:DOTNET_URLS}",
+    "DOTNET_DEFAULT_CONNECTION_STRING": "${containerEnv:DOTNET_DEFAULT_CONNECTION_STRING}"
   },
   "customizations": {
     "vscode": {

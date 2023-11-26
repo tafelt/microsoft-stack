@@ -6,7 +6,10 @@
   "shutdownAction": "none",
   "overrideCommand": false,
   "remoteEnv": {
-    "MSSQL_SA_PASSWORD": "${containerEnv:MSSQL_SA_PASSWORD}"
+    "MSSQL_USER_ID": "${containerEnv:MSSQL_USER_ID}",
+    "MSSQL_SA_PASSWORD": "${containerEnv:MSSQL_SA_PASSWORD}",
+    "MSSQL_DATA_SOURCE": "${containerEnv:MSSQL_DATA_SOURCE}",
+    "MSSQL_APP_DATABASE": "${containerEnv:MSSQL_APP_DATABASE}"
   },
   "customizations": {
     "vscode": {
