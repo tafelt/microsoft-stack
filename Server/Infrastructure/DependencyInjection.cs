@@ -9,7 +9,7 @@ public static class DependencyInjection
 {
   public static IServiceCollection AddInfrastructure(this IServiceCollection services)
   {
-    services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
+    services.AddTransient<ISqlConnectionFactory, SqlConnectionFactory>();
     services.AddScoped<IUserRepository, UserRepository>();
 
     return services;

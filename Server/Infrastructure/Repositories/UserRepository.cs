@@ -8,7 +8,7 @@ namespace Infrastructure;
 
 public class UserRepository : IUserRepository
 {
-  private ISqlConnectionFactory _sqlConnectionFactory;
+  private readonly ISqlConnectionFactory _sqlConnectionFactory;
 
   public UserRepository(ISqlConnectionFactory sqlConnectionFactory)
   {
