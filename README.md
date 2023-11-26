@@ -49,7 +49,7 @@ which can be ignored.
 ## FAQ
 
 ### How to connect a remote container
-- Start VS Code and run `Remote-Containers: Open Folder in Container...` from the Command Palette (F1) and select a folder containing `.devcontainer` folder.
+- Start VS Code and run `Dev Containers: Open Folder in Container...` from the Command Palette (F1) and select a folder containing `.devcontainer` folder.
 - If you want to connect multiple containers, start up a new window using `File > New Window` and repeat the previous step.
 
 ### How to create a new connection to MSSQL server from VS Code
