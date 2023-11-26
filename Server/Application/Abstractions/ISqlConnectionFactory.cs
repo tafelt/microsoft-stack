@@ -4,5 +4,5 @@ namespace Application.Abstractions;
 
 public interface ISqlConnectionFactory
 {
-  SqlConnection CreateConnection();
+  SqlConnection GetOpenConnection();
 }

@@ -4,7 +4,7 @@ using Dapper;
 using Domain.Entities;
 using Microsoft.Data.SqlClient;
 
-namespace Infrastructure;
+namespace Infrastructure.Repositories;
 
 public class UserRepository : IUserRepository
 {
@@ -17,7 +17,7 @@ public class UserRepository : IUserRepository
 
   public Task<List<User>> GetAllAsync()
   {
-    using SqlConnection connection = _sqlConnectionFactory.CreateConnection();
+    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
     const string Sql =
       @"
@@ -35,7 +35,7 @@ public class UserRepository : IUserRepository
 
   public Task<User> GetByIdAsync(long id)
   {
-    using SqlConnection connection = _sqlConnectionFactory.CreateConnection();
+    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
     const string Sql =
       @"
@@ -54,7 +54,7 @@ public class UserRepository : IUserRepository
 
   public Task<User> CreateAsync(User entity)
   {
-    using SqlConnection connection = _sqlConnectionFactory.CreateConnection();
+    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
     const string Sql =
       @"
@@ -73,7 +73,7 @@ public class UserRepository : IUserRepository
 
   public Task<User> UpdateAsync(User entity)
   {
-    using SqlConnection connection = _sqlConnectionFactory.CreateConnection();
+    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
     const string Sql =
       @"
@@ -102,7 +102,7 @@ public class UserRepository : IUserRepository
 
   public Task<User> DeleteAsync(long id)
   {
-    using SqlConnection connection = _sqlConnectionFactory.CreateConnection();
+    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
     const string Sql =
       @"
