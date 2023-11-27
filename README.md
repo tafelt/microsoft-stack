@@ -24,11 +24,11 @@ This project presents the use of Microsoft technologies in VS Code `devcontainer
 
 - Clone the project to the desired location
   - For better performance, Windows users should clone the repo under WSL `\\wsl$\Ubuntu-22.04\home\<username>\<folder>\`
-- Create an `.env` file at the root of the project based on the `.env.example` file
-  - If you are using a MacOS remember to change the default build platform for Apple Silicon
-- To develop the different solutions, all you need to do is open the `./Client`, `./Database` or `./Server/` folders on the remote container
-  - Wait for container to install all dependencies and extensions
+- Create an `.env` file by running `./setup.sh` script
+- To develop the different solutions, all you need to do is open the `./Client`, `./Database` or `./Server` folders on the remote container
+  - When you open a container, you have to wait for the container to install all dependencies and extensions
   - After this, you can use the solution normally
+- FYI, database migrations are run automatically when you open any remote container
 
 ## Known issues
 

@@ -7,7 +7,7 @@ internal sealed class SqlConnectionFactory : ISqlConnectionFactory
 {
   public SqlConnection GetOpenConnection()
   {
-    var connectionString = Environment.GetEnvironmentVariable("DOTNET_DEFAULT_CONNECTION_STRING");
+    var connectionString = Environment.GetEnvironmentVariable("DOTNET_APP_CONNECTION_STRING");
     var connection = new SqlConnection(connectionString);
 
     connection.Open();

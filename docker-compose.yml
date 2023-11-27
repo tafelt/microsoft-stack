@@ -18,7 +18,7 @@ services:
     environment:
       - DOTNET_PORT=${DOTNET_PORT}
       - DOTNET_URLS=${DOTNET_URLS}
-      - DOTNET_DEFAULT_CONNECTION_STRING=${DOTNET_DEFAULT_CONNECTION_STRING}
+      - DOTNET_APP_CONNECTION_STRING=${DOTNET_APP_CONNECTION_STRING}
   mssql:
     container_name: ${PROJECT}-mssql
     # NOTE: Image is not available for linux/arm64/v8, enable rosetta for x86/amd64 emulation on apple silicon in docker settings
