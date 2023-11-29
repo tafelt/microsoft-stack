@@ -6,10 +6,11 @@
   "shutdownAction": "none",
   "overrideCommand": false,
   "remoteEnv": {
-    "MSSQL_USER_ID": "${containerEnv:MSSQL_USER_ID}",
-    "MSSQL_SA_PASSWORD": "${containerEnv:MSSQL_SA_PASSWORD}",
-    "MSSQL_DATA_SOURCE": "${containerEnv:MSSQL_DATA_SOURCE}",
-    "MSSQL_APP_DATABASE": "${containerEnv:MSSQL_APP_DATABASE}"
+    "MSSQL_APP_DATABASE": "${containerEnv:MSSQL_APP_DATABASE}",
+    "MSSQL_APP_TEST_DATABASE": "${containerEnv:MSSQL_APP_TEST_DATABASE}",
+    "MSSQL_SYSTEM_CONNECTION_STRING": "${containerEnv:MSSQL_SYSTEM_CONNECTION_STRING}",
+    "MSSQL_APP_CONNECTION_STRING": "${containerEnv:MSSQL_APP_CONNECTION_STRING}",
+    "MSSQL_APP_TEST_CONNECTION_STRING": "${containerEnv:MSSQL_APP_TEST_CONNECTION_STRING}"
   },
   "customizations": {
     "vscode": {

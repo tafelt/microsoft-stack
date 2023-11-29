@@ -8,7 +8,8 @@
   "remoteEnv": {
     "DOTNET_PORT": "${containerEnv:DOTNET_PORT}",
     "DOTNET_URLS": "${containerEnv:DOTNET_URLS}",
-    "DOTNET_APP_CONNECTION_STRING": "${containerEnv:DOTNET_APP_CONNECTION_STRING}"
+    "MSSQL_APP_CONNECTION_STRING": "${containerEnv:MSSQL_APP_CONNECTION_STRING}",
+    "MSSQL_APP_TEST_CONNECTION_STRING": "${containerEnv:MSSQL_APP_TEST_CONNECTION_STRING}"
   },
   "customizations": {
     "vscode": {
