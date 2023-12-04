@@ -28,7 +28,9 @@ This project presents the use of Microsoft technologies in VS Code `devcontainer
 - To develop the different solutions, all you need to do is open the `./Client`, `./Database` or `./Server` folders on the remote container
   - When you open a container, you have to wait for the container to install all dependencies and extensions
   - After this, you can use the solution normally
-- FYI, database migrations are run automatically when you open any remote container
+- FYI
+  - Database migrations are run automatically when you open any remote container
+  - Server API endpoints can be accessed from `http://localhost:DOTNET_PORT/swagger`
 
 ## Known issues
 
