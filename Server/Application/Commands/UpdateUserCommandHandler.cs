@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Commands;
 
-public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User>
+public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User?>
 {
   private readonly IUserRepository _userRepository;
 
@@ -13,7 +13,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User>
     _userRepository = userRepository;
   }
 
-  public Task<User> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+  public Task<User?> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
   {
     var user = new User
     {

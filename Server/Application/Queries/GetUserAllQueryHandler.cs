@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Queries;
 
-internal class GetUserAllQueryHandler : IRequestHandler<GetUserAllQuery, List<User>>
+internal class GetUserAllQueryHandler : IRequestHandler<GetUserAllQuery, IEnumerable<User>>
 {
   private readonly IUserRepository _userRepository;
 
@@ -13,7 +13,10 @@ internal class GetUserAllQueryHandler : IRequestHandler<GetUserAllQuery, List<Us
     _userRepository = userRepository;
   }
 
-  public Task<List<User>> Handle(GetUserAllQuery request, CancellationToken cancellationToken)
+  public Task<IEnumerable<User>> Handle(
+    GetUserAllQuery request,
+    CancellationToken cancellationToken
+  )
   {
     return _userRepository.GetAllAsync();
   }

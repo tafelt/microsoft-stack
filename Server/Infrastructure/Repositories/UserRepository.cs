@@ -15,7 +15,7 @@ public class UserRepository : IUserRepository
     _sqlConnectionFactory = sqlConnectionFactory;
   }
 
-  public Task<List<User>> GetAllAsync()
+  public Task<IEnumerable<User>> GetAllAsync()
   {
     using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
@@ -28,12 +28,12 @@ public class UserRepository : IUserRepository
         FROM [User];
       ";
 
-    var result = connection.QueryAsync<User>(Sql).GetAwaiter().GetResult().ToList();
+    var result = connection.QueryAsync<User>(Sql).GetAwaiter().GetResult();
 
     return Task.FromResult(result);
   }
 
-  public Task<User> GetByIdAsync(long id)
+  public Task<User?> GetByIdAsync(long id)
   {
     using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
@@ -47,7 +47,10 @@ public class UserRepository : IUserRepository
         WHERE [Id] = @Id;
       ";
 
-    var result = connection.QuerySingleAsync<User>(Sql, new { Id = id }).GetAwaiter().GetResult();
+    var result = connection
+      .QuerySingleOrDefaultAsync<User>(Sql, new { Id = id })
+      .GetAwaiter()
+      .GetResult();
 
     return Task.FromResult(result);
   }
@@ -71,7 +74,7 @@ public class UserRepository : IUserRepository
     return Task.FromResult(result);
   }
 
-  public Task<User> UpdateAsync(User entity)
+  public Task<User?> UpdateAsync(User entity)
   {
     using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
@@ -85,7 +88,7 @@ public class UserRepository : IUserRepository
       ";
 
     var result = connection
-      .QuerySingleAsync<User>(
+      .QuerySingleOrDefaultAsync<User>(
         Sql,
         new
         {
@@ -100,7 +103,7 @@ public class UserRepository : IUserRepository
     return Task.FromResult(result);
   }
 
-  public Task<User> DeleteAsync(long id)
+  public Task<User?> DeleteAsync(long id)
   {
     using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
@@ -111,7 +114,10 @@ public class UserRepository : IUserRepository
         WHERE [Id] = @Id;
       ";
 
-    var result = connection.QuerySingleAsync<User>(Sql, new { Id = id }).GetAwaiter().GetResult();
+    var result = connection
+      .QuerySingleOrDefaultAsync<User>(Sql, new { Id = id })
+      .GetAwaiter()
+      .GetResult();
 
     return Task.FromResult(result);
   }

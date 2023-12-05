@@ -18,7 +18,7 @@ public class UsersController : ControllerBase
   }
 
   [HttpGet]
-  public Task<List<User>> GetUsers()
+  public Task<IEnumerable<User>> GetUsers()
   {
     var query = new GetUserAllQuery();
     var result = _mediator.Send(query);
@@ -27,7 +27,7 @@ public class UsersController : ControllerBase
   }
 
   [HttpGet("{id:int}")]
-  public Task<User> GetUserById(int id)
+  public Task<User?> GetUserById(int id)
   {
     var query = new GetUserByIdQuery { Id = id };
     var result = _mediator.Send(query);
@@ -45,7 +45,7 @@ public class UsersController : ControllerBase
   }
 
   [HttpPut("{id:int}")]
-  public Task<User> UpdateUser(int id, User user)
+  public Task<User?> UpdateUser(int id, User user)
   {
     var command = new UpdateUserCommand
     {
@@ -60,7 +60,7 @@ public class UsersController : ControllerBase
   }
 
   [HttpDelete("{id:int}")]
-  public Task<User> DeleteUser(int id)
+  public Task<User?> DeleteUser(int id)
   {
     var command = new DeleteUserCommand { Id = id };
     var result = _mediator.Send(command);

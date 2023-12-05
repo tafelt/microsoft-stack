@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Commands;
 
-public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, User>
+public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, User?>
 {
   private readonly IUserRepository _userRepository;
 
@@ -13,7 +13,7 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, User>
     _userRepository = userRepository;
   }
 
-  public Task<User> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+  public Task<User?> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
   {
     return _userRepository.DeleteAsync(request.Id);
   }
