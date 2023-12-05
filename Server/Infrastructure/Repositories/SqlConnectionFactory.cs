@@ -1,4 +1,4 @@
-﻿using Application.Abstractions;
+﻿using Infrastructure.Interfaces;
 using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Repositories;

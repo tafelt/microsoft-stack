@@ -1,5 +1,5 @@
-﻿using Application.Abstractions;
-using Application.Repositories;
+﻿using Application.Repositories;
+using Infrastructure.Interfaces;
 using Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 

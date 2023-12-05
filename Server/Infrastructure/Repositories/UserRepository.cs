@@ -1,7 +1,7 @@
-﻿using Application.Abstractions;
-using Application.Repositories;
+﻿using Application.Repositories;
 using Dapper;
 using Domain.Entities;
+using Infrastructure.Interfaces;
 using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Repositories;
@@ -25,7 +25,7 @@ public class UserRepository : IUserRepository
           [Id],
           [Name],
           [Email]
-        FROM [User];
+        FROM [dbo].[User];
       ";
 
     var result = connection.QueryAsync<User>(Sql).GetAwaiter().GetResult();
@@ -43,7 +43,7 @@ public class UserRepository : IUserRepository
           [Id],
           [Name],
           [Email]
-        FROM [User]
+        FROM [dbo].[User]
         WHERE [Id] = @Id;
       ";
 
@@ -61,7 +61,7 @@ public class UserRepository : IUserRepository
 
     const string Sql =
       @"
-        INSERT INTO [User] ([Name], [Email])
+        INSERT INTO [dbo].[User] ([Name], [Email])
         OUTPUT inserted.Id, inserted.Name, inserted.Email
         VALUES (@Name, @Email);
       ";
@@ -80,7 +80,7 @@ public class UserRepository : IUserRepository
 
     const string Sql =
       @"
-        UPDATE [User]
+        UPDATE [dbo].[User]
         SET [Name] = @Name,
             [Email] = @Email
         OUTPUT inserted.Id, inserted.Name, inserted.Email
@@ -109,7 +109,7 @@ public class UserRepository : IUserRepository
 
     const string Sql =
       @"
-        DELETE FROM [User]
+        DELETE FROM [dbo].[User]
         OUTPUT deleted.Id, deleted.Name, deleted.Email
         WHERE [Id] = @Id;
       ";
