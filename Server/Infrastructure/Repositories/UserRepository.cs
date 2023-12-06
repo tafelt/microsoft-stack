@@ -1,6 +1,6 @@
-﻿using Application.Repositories;
-using Dapper;
+﻿using Dapper;
 using Domain.Entities;
+using Domain.Repositories;
 using Infrastructure.Interfaces;
 using Microsoft.Data.SqlClient;
 
