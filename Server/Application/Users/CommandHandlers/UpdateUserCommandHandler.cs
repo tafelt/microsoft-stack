@@ -1,8 +1,9 @@
-﻿using Domain.Entities;
+﻿using Application.Users.Commands;
+using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
 
-namespace Application.Commands;
+namespace Application.Users.CommandHandlers;
 
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User?>
 {

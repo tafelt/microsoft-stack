@@ -1,8 +1,9 @@
-﻿using Domain.Entities;
+﻿using Application.Users.Queries;
+using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
 
-namespace Application.Queries;
+namespace Application.Users.QueryHandlers;
 
 public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User?>
 {
