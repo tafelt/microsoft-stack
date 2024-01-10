@@ -1,10 +1,10 @@
-﻿using Swashbuckle.AspNetCore.Annotations;
+﻿using Domain.Users;
+using MediatR;
 
-namespace Domain.Entities;
+namespace Application.Users.Commands;
 
-public class User
+public class UpdateUserCommand : IRequest<User?>
 {
-  [SwaggerSchema(ReadOnly = true)]
   public int Id { get; set; }
 
   public required string Name { get; set; }

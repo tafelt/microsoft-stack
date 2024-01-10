@@ -1,9 +1,7 @@
-﻿using Application.Users.Commands;
-using Domain.Entities;
-using Domain.Repositories;
+﻿using Domain.Users;
 using MediatR;
 
-namespace Application.Users.CommandHandlers;
+namespace Application.Users.Commands;
 
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User?>
 {
@@ -16,12 +14,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User?
 
   public Task<User?> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
   {
-    var user = new User
-    {
-      Id = request.Id,
-      Name = request.Name,
-      Email = request.Email
-    };
+    var user = new User(request.Id, request.Name, request.Email);
 
     return _userRepository.UpdateAsync(user);
   }

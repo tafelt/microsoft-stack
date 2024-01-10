@@ -1,10 +1,9 @@
 ﻿using Dapper;
-using Domain.Entities;
-using Domain.Repositories;
-using Infrastructure.Interfaces;
+using Domain.Users;
+using Infrastructure.Persistance.DataAccess.SqlServer;
 using Microsoft.Data.SqlClient;
 
-namespace Infrastructure.Repositories;
+namespace Infrastructure.Persistance.Repositories;
 
 public class UserRepository : IUserRepository
 {
@@ -33,7 +32,7 @@ public class UserRepository : IUserRepository
     return Task.FromResult(result);
   }
 
-  public Task<User?> GetByIdAsync(long id)
+  public Task<User?> GetByIdAsync(int id)
   {
     using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 
@@ -103,7 +102,7 @@ public class UserRepository : IUserRepository
     return Task.FromResult(result);
   }
 
-  public Task<User?> DeleteAsync(long id)
+  public Task<User?> DeleteAsync(int id)
   {
     using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
 

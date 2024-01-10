@@ -1,6 +1,6 @@
 ﻿using Application.Users.Commands;
 using Application.Users.Queries;
-using Domain.Entities;
+using Contracts.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,53 +18,68 @@ public class UsersController : ControllerBase
   }
 
   [HttpGet]
-  public Task<IEnumerable<User>> GetUsers()
+  public async Task<IEnumerable<UserResponse>> GetUsers()
   {
-    var query = new GetUserAllQuery();
-    var result = _mediator.Send(query);
+    var query = new GetAllUsersQuery();
+    var result = await _mediator.Send(query);
 
-    return result;
+    return result.Select(user => new UserResponse(user.Id, user.Name, user.Email));
   }
 
   [HttpGet("{id:int}")]
-  public Task<User?> GetUserById(int id)
+  public async Task<UserResponse?> GetUserById(int id)
   {
     var query = new GetUserByIdQuery { Id = id };
-    var result = _mediator.Send(query);
+    var result = await _mediator.Send(query);
 
-    return result;
+    if (result is null)
+    {
+      return null;
+    }
+
+    return new UserResponse(result.Id, result.Name, result.Email);
   }
 
   [HttpPost]
-  public Task<User> CreateUser(User user)
+  public async Task<UserResponse> CreateUser(CreateUserRequest request)
   {
-    var command = new CreateUserCommand { Name = user.Name, Email = user.Email };
-    var result = _mediator.Send(command);
+    var command = new CreateUserCommand { Name = request.Name, Email = request.Email };
+    var result = await _mediator.Send(command);
 
-    return result;
+    return new UserResponse(result.Id, result.Name, result.Email);
   }
 
   [HttpPut("{id:int}")]
-  public Task<User?> UpdateUser(int id, User user)
+  public async Task<UserResponse?> UpdateUser(int id, UpdateUserRequest request)
   {
     var command = new UpdateUserCommand
     {
       Id = id,
-      Name = user.Name,
-      Email = user.Email
+      Name = request.Name,
+      Email = request.Email
     };
 
-    var result = _mediator.Send(command);
+    var result = await _mediator.Send(command);
 
-    return result;
+    if (result is null)
+    {
+      return null;
+    }
+
+    return new UserResponse(result.Id, result.Name, result.Email);
   }
 
   [HttpDelete("{id:int}")]
-  public Task<User?> DeleteUser(int id)
+  public async Task<UserResponse?> DeleteUser(int id)
   {
     var command = new DeleteUserCommand { Id = id };
-    var result = _mediator.Send(command);
+    var result = await _mediator.Send(command);
 
-    return result;
+    if (result is null)
+    {
+      return null;
+    }
+
+    return new UserResponse(result.Id, result.Name, result.Email);
   }
 }

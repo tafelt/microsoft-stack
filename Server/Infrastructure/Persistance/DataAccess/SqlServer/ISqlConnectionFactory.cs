@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace Infrastructure.Interfaces;
+namespace Infrastructure.Persistance.DataAccess.SqlServer;
 
 public interface ISqlConnectionFactory
 {

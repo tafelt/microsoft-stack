@@ -1,9 +1,7 @@
-﻿using Application.Users.Commands;
-using Domain.Entities;
-using Domain.Repositories;
+﻿using Domain.Users;
 using MediatR;
 
-namespace Application.Users.CommandHandlers;
+namespace Application.Users.Commands;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
 {
@@ -16,7 +14,8 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
 
   public Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
   {
-    var user = new User { Name = request.Name, Email = request.Email };
+    // NOTE: SqlServer automatically generates the ID information
+    var user = new User(-1, request.Name, request.Email);
 
     return _userRepository.CreateAsync(user);
   }

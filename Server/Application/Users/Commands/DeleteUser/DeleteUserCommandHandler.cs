@@ -1,9 +1,7 @@
-﻿using Application.Users.Commands;
-using Domain.Entities;
-using Domain.Repositories;
+﻿using Domain.Users;
 using MediatR;
 
-namespace Application.Users.CommandHandlers;
+namespace Application.Users.Commands;
 
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, User?>
 {
