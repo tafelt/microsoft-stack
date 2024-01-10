@@ -9,13 +9,7 @@ builder.Services.AddApplication().AddInfrastructure();
 builder.Services.AddControllers();
 builder.Services.AddCors();
 builder.Services.AddEndpointsApiExplorer();
-
-builder
-  .Services
-  .AddSwaggerGen(options =>
-  {
-    options.EnableAnnotations();
-  });
+builder.Services.AddSwaggerGen();
 
 builder
   .Services
