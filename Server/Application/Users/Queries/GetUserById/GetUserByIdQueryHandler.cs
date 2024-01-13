@@ -1,9 +1,10 @@
 ﻿using Domain.Users;
+using Domain.Users.Exceptions;
 using MediatR;
 
 namespace Application.Users.Queries;
 
-public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User?>
+public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User>
 {
   private readonly IUserRepository _userRepository;
 
@@ -12,8 +13,9 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User?>
     _userRepository = userRepository;
   }
 
-  public Task<User?> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+  public async Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
   {
-    return _userRepository.GetByIdAsync(request.Id);
+    return await _userRepository.GetByIdAsync(request.Id)
+      ?? throw new UserNotFoundException("User was not found.");
   }
 }

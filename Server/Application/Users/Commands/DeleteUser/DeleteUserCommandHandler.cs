@@ -1,9 +1,10 @@
 ﻿using Domain.Users;
+using Domain.Users.Exceptions;
 using MediatR;
 
 namespace Application.Users.Commands;
 
-public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, User?>
+public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, User>
 {
   private readonly IUserRepository _userRepository;
 
@@ -12,8 +13,9 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, User?
     _userRepository = userRepository;
   }
 
-  public Task<User?> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+  public async Task<User> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
   {
-    return _userRepository.DeleteAsync(request.Id);
+    return await _userRepository.DeleteAsync(request.Id)
+      ?? throw new UserNotFoundException("User was not found.");
   }
 }

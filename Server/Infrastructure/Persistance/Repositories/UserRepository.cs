@@ -54,6 +54,28 @@ public class UserRepository : IUserRepository
     return Task.FromResult(result);
   }
 
+  public Task<User?> GetByEmailAsync(string email)
+  {
+    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
+
+    const string Sql =
+      @"
+        SELECT
+          [Id],
+          [Name],
+          [Email]
+        FROM [dbo].[User]
+        WHERE [Email] = @Email;
+      ";
+
+    var result = connection
+      .QuerySingleOrDefaultAsync<User>(Sql, new { Email = email })
+      .GetAwaiter()
+      .GetResult();
+
+    return Task.FromResult(result);
+  }
+
   public Task<User> CreateAsync(User entity)
   {
     using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();

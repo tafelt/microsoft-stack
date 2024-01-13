@@ -1,4 +1,5 @@
 ﻿using Domain.Users;
+using Domain.Users.Exceptions;
 using MediatR;
 
 namespace Application.Users.Commands;
@@ -12,11 +13,18 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
     _userRepository = userRepository;
   }
 
-  public Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+  public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
   {
-    // NOTE: SqlServer automatically generates the ID information
+    var existingUser = await _userRepository.GetByEmailAsync(request.Email);
+
+    if (existingUser is not null)
+    {
+      throw new UserAlreadyExistsException("User already exists.");
+    }
+
+    // NOTE: SqlServer automatically generates the ID when the row is inserted
     var user = new User(-1, request.Name, request.Email);
 
-    return _userRepository.CreateAsync(user);
+    return await _userRepository.CreateAsync(user);
   }
 }
