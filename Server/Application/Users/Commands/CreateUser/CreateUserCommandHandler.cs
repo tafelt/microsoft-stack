@@ -23,7 +23,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
     }
 
     // NOTE: SqlServer automatically generates the ID when the row is inserted
-    var user = new User(-1, request.Name, request.Email);
+    var user = new User(-999, request.Name, request.Email);
 
     return await _userRepository.CreateAsync(user);
   }

@@ -3,6 +3,7 @@ using Application.Users.Queries;
 using Carter;
 using Contracts.Users;
 using Domain.Users.Exceptions;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -16,13 +17,9 @@ public class UsersEndpoints : ICarterModule
     var group = app.MapGroup("api/users");
 
     group.MapPost("", CreateUser);
-
     group.MapGet("", GetUsers);
-
     group.MapGet("{id:int}", GetUser).WithName(nameof(GetUser));
-
     group.MapPut("{id:int}", UpdateUser).WithName(nameof(UpdateUser));
-
     group.MapDelete("{id:int}", DeleteUser).WithName(nameof(DeleteUser));
   }
 
@@ -33,9 +30,9 @@ public class UsersEndpoints : ICarterModule
   {
     try
     {
-      var command = new CreateUserCommand { Name = request.Name, Email = request.Email };
+      var command = request.Adapt<CreateUserCommand>();
       var result = await sender.Send(command);
-      var response = new UserResponse(result.Id, result.Name, result.Email);
+      var response = result.Adapt<UserResponse>();
 
       return TypedResults.Ok(response);
     }
@@ -49,7 +46,7 @@ public class UsersEndpoints : ICarterModule
   {
     var query = new GetAllUsersQuery();
     var result = await sender.Send(query);
-    var response = result.Select(user => new UserResponse(user.Id, user.Name, user.Email));
+    var response = result.Adapt<IEnumerable<UserResponse>>();
 
     return TypedResults.Ok(response);
   }
@@ -63,7 +60,7 @@ public class UsersEndpoints : ICarterModule
     {
       var query = new GetUserByIdQuery { Id = id };
       var result = await sender.Send(query);
-      var response = new UserResponse(result.Id, result.Name, result.Email);
+      var response = result.Adapt<UserResponse>();
 
       return TypedResults.Ok(response);
     }
@@ -89,7 +86,7 @@ public class UsersEndpoints : ICarterModule
       };
 
       var result = await sender.Send(command);
-      var response = new UserResponse(result.Id, result.Name, result.Email);
+      var response = result.Adapt<UserResponse>();
 
       return TypedResults.Ok(response);
     }
@@ -108,7 +105,7 @@ public class UsersEndpoints : ICarterModule
     {
       var command = new DeleteUserCommand { Id = id };
       var result = await sender.Send(command);
-      var response = new UserResponse(result.Id, result.Name, result.Email);
+      var response = result.Adapt<UserResponse>();
 
       return TypedResults.Ok(response);
     }
