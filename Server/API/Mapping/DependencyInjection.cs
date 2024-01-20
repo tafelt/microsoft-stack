@@ -1,17 +1,17 @@
 ﻿using System.Reflection;
 using Mapster;
 using MapsterMapper;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Contracts;
+namespace API.Mapping;
 
 public static class DependencyInjection
 {
-  public static IServiceCollection AddContracts(this IServiceCollection services)
+  public static IServiceCollection AddMapping(this IServiceCollection services)
   {
     var config = TypeAdapterConfig.GlobalSettings;
 
     config.Scan(Assembly.GetExecutingAssembly());
+
     services.AddSingleton(config);
     services.AddScoped<IMapper, ServiceMapper>();
 

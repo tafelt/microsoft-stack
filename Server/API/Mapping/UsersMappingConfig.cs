@@ -1,8 +1,9 @@
 ﻿using Application.Users.Commands;
+using Contracts.Users;
 using Domain.Users;
 using Mapster;
 
-namespace Contracts.Users;
+namespace API.Mapping;
 
 public class UsersMappingConfig : IRegister
 {

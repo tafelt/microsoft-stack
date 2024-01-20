@@ -16,8 +16,8 @@ public class UsersEndpoints : ICarterModule
   {
     var group = app.MapGroup("api/users");
 
-    group.MapPost("", CreateUser);
-    group.MapGet("", GetUsers);
+    group.MapPost("", CreateUser).WithName(nameof(CreateUser));
+    group.MapGet("", GetUsers).WithName(nameof(GetUsers));
     group.MapGet("{id:int}", GetUser).WithName(nameof(GetUser));
     group.MapPut("{id:int}", UpdateUser).WithName(nameof(UpdateUser));
     group.MapDelete("{id:int}", DeleteUser).WithName(nameof(DeleteUser));
