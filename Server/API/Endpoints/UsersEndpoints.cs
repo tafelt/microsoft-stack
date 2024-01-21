@@ -3,6 +3,8 @@ using Application.Users.Queries;
 using Carter;
 using Contracts.Users;
 using Domain.Users.Exceptions;
+using FluentValidation;
+using FluentValidation.Results;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -23,10 +25,9 @@ public class UsersEndpoints : ICarterModule
     group.MapDelete("{id:int}", DeleteUser).WithName(nameof(DeleteUser));
   }
 
-  public static async Task<Results<Ok<UserResponse>, Conflict<string>>> CreateUser(
-    [FromBody] CreateUserRequest request,
-    ISender sender
-  )
+  public static async Task<
+    Results<Ok<UserResponse>, BadRequest<IEnumerable<ValidationFailure>>, Conflict<string>>
+  > CreateUser([FromBody] CreateUserRequest request, ISender sender)
   {
     try
     {
@@ -35,6 +36,10 @@ public class UsersEndpoints : ICarterModule
       var response = result.Adapt<UserResponse>();
 
       return TypedResults.Ok(response);
+    }
+    catch (ValidationException e)
+    {
+      return TypedResults.BadRequest(e.Errors);
     }
     catch (UserAlreadyExistsException e)
     {

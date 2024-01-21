@@ -15,9 +15,9 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
 
   public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
   {
-    var existingUser = await _userRepository.GetByEmailAsync(request.Email);
+    var userExists = _userRepository.GetByEmailAsync(request.Email) is not null;
 
-    if (existingUser is not null)
+    if (userExists)
     {
       throw new UserAlreadyExistsException("User already exists.");
     }
