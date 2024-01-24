@@ -1,4 +1,5 @@
 using API;
+using API.Middlewares;
 using Application;
 using Carter;
 using Infrastructure;
@@ -17,6 +18,8 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 app.MapCarter();
 

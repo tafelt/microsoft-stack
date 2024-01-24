@@ -2,9 +2,9 @@
 
 namespace Application.Users.Commands;
 
-public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
 {
-  public CreateUserCommandValidator()
+  public UpdateUserCommandValidator()
   {
     RuleFor(c => c.Name).NotEmpty().WithMessage("The name cannot be empty.");
 

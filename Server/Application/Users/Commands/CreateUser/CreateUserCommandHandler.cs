@@ -19,7 +19,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
 
     if (userExists)
     {
-      throw new UserAlreadyExistsException("User already exists.");
+      throw new UserAlreadyExistsException();
     }
 
     // NOTE: SqlServer automatically generates the ID when the row is inserted
