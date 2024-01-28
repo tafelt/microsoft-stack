@@ -12,12 +12,12 @@ internal sealed class SqlConnectionFactory : ISqlConnectionFactory
     _settingsService = settingsService;
   }
 
-  public SqlConnection GetOpenConnection()
+  public async Task<SqlConnection> GetOpenConnectionAsync()
   {
     var connectionString = _settingsService.GetSqlConnectionString();
     var connection = new SqlConnection(connectionString);
 
-    connection.Open();
+    await connection.OpenAsync();
 
     return connection;
   }

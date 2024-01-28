@@ -4,5 +4,5 @@ namespace Infrastructure.Persistance.DataAccess.SqlServer;
 
 public interface ISqlConnectionFactory
 {
-  SqlConnection GetOpenConnection();
+  Task<SqlConnection> GetOpenConnectionAsync();
 }

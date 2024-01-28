@@ -1,23 +1,19 @@
-﻿using Dapper;
-using Domain.Users;
+﻿using Domain.Users;
 using Infrastructure.Persistance.DataAccess.SqlServer;
-using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Persistance.Repositories;
 
 public class UserRepository : IUserRepository
 {
-  private readonly ISqlConnectionFactory _sqlConnectionFactory;
+  private readonly ISqlConnector _sqlConnector;
 
-  public UserRepository(ISqlConnectionFactory sqlConnectionFactory)
+  public UserRepository(ISqlConnector sqlConnector)
   {
-    _sqlConnectionFactory = sqlConnectionFactory;
+    _sqlConnector = sqlConnector;
   }
 
   public Task<IEnumerable<User>> GetAllAsync()
   {
-    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
-
     const string Sql =
       @"
         SELECT
@@ -27,15 +23,11 @@ public class UserRepository : IUserRepository
         FROM [dbo].[User];
       ";
 
-    var result = connection.QueryAsync<User>(Sql).GetAwaiter().GetResult();
-
-    return Task.FromResult(result);
+    return _sqlConnector.QueryAsync<User>(Sql);
   }
 
   public Task<User?> GetByIdAsync(int id)
   {
-    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
-
     const string Sql =
       @"
         SELECT
@@ -46,18 +38,11 @@ public class UserRepository : IUserRepository
         WHERE [Id] = @Id;
       ";
 
-    var result = connection
-      .QuerySingleOrDefaultAsync<User>(Sql, new { Id = id })
-      .GetAwaiter()
-      .GetResult();
-
-    return Task.FromResult(result);
+    return _sqlConnector.QuerySingleOrDefaultAsync<User>(Sql, new { Id = id });
   }
 
   public Task<User?> GetByEmailAsync(string email)
   {
-    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
-
     const string Sql =
       @"
         SELECT
@@ -68,18 +53,11 @@ public class UserRepository : IUserRepository
         WHERE [Email] = @Email;
       ";
 
-    var result = connection
-      .QuerySingleOrDefaultAsync<User>(Sql, new { Email = email })
-      .GetAwaiter()
-      .GetResult();
-
-    return Task.FromResult(result);
+    return _sqlConnector.QuerySingleOrDefaultAsync<User>(Sql, new { Email = email });
   }
 
   public Task<User> CreateAsync(User entity)
   {
-    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
-
     const string Sql =
       @"
         INSERT INTO [dbo].[User] ([Name], [Email])
@@ -87,18 +65,11 @@ public class UserRepository : IUserRepository
         VALUES (@Name, @Email);
       ";
 
-    var result = connection
-      .QuerySingleAsync<User>(Sql, new { entity.Name, entity.Email })
-      .GetAwaiter()
-      .GetResult();
-
-    return Task.FromResult(result);
+    return _sqlConnector.QuerySingleAsync<User>(Sql, new { entity.Name, entity.Email });
   }
 
   public Task<User?> UpdateAsync(User entity)
   {
-    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
-
     const string Sql =
       @"
         UPDATE [dbo].[User]
@@ -108,26 +79,19 @@ public class UserRepository : IUserRepository
         WHERE [Id] = @Id;
       ";
 
-    var result = connection
-      .QuerySingleOrDefaultAsync<User>(
-        Sql,
-        new
-        {
-          entity.Id,
-          entity.Name,
-          entity.Email
-        }
-      )
-      .GetAwaiter()
-      .GetResult();
-
-    return Task.FromResult(result);
+    return _sqlConnector.QuerySingleOrDefaultAsync<User>(
+      Sql,
+      new
+      {
+        entity.Id,
+        entity.Name,
+        entity.Email
+      }
+    );
   }
 
   public Task<User?> DeleteAsync(int id)
   {
-    using SqlConnection connection = _sqlConnectionFactory.GetOpenConnection();
-
     const string Sql =
       @"
         DELETE FROM [dbo].[User]
@@ -135,11 +99,6 @@ public class UserRepository : IUserRepository
         WHERE [Id] = @Id;
       ";
 
-    var result = connection
-      .QuerySingleOrDefaultAsync<User>(Sql, new { Id = id })
-      .GetAwaiter()
-      .GetResult();
-
-    return Task.FromResult(result);
+    return _sqlConnector.QuerySingleOrDefaultAsync<User>(Sql, new { Id = id });
   }
 }

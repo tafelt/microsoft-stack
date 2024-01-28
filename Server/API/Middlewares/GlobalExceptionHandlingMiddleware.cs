@@ -58,7 +58,7 @@ public class GlobalExceptionHandlingMiddleware : IMiddleware
         Status = (int)HttpStatusCode.InternalServerError,
         Type = typeof(Exception).Name,
         Title = "InternalServerError",
-        Detail = "An internal server error has occurred."
+        Detail = e.Message
       };
 
       await WriteExceptionResponseAsync(HttpStatusCode.InternalServerError, problemDetails);

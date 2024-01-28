@@ -11,6 +11,7 @@ public static class DependencyInjection
   public static IServiceCollection AddInfrastructure(this IServiceCollection services)
   {
     services.AddTransient<ISqlConnectionFactory, SqlConnectionFactory>();
+    services.AddTransient<ISqlConnector, SqlConnector>();
     services.AddScoped<ISettingsService, SettingsService>();
     services.AddScoped<IUserRepository, UserRepository>();
 
