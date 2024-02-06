@@ -1,0 +1,31 @@
+{
+  "name": "App Client",
+  "service": "client",
+  "dockerComposeFile": "../../docker-compose.yml",
+  "workspaceFolder": "/usr/src/Client",
+  "shutdownAction": "none",
+  "overrideCommand": false,
+  "remoteEnv": {
+    "REACT_PORT": "${containerEnv:REACT_PORT}"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.eol": "\n",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "files.exclude": {
+          "**/node_modules": true
+        }
+      },
+      "extensions": [
+        "visualstudioexptteam.vscodeintellicode",
+        "dbaeumer.vscode-eslint",
+        "meganrogge.template-string-converter",
+        "formulahendry.auto-rename-tag",
+        "dsznajder.es7-react-js-snippets",
+        "planbcoding.vscode-react-refactor"
+      ]
+    }
+  }
+}

@@ -16,6 +16,8 @@
     "vscode": {
       "settings": {
         "files.eol": "\n",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
         "editor.formatOnSave": true,
         "editor.formatOnSaveMode": "modifications",
         "[csharp]": {
