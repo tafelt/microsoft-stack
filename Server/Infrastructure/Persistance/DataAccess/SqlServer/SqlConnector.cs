@@ -15,7 +15,7 @@ internal sealed class SqlConnector : ISqlConnector
     _sqlConnectionFactory = sqlConnectionFactory;
   }
 
-  private async Task<TResult> UsingTransaction<TResult>(
+  private async Task<TResult> QueryUsingTransaction<TResult>(
     Func<SqlConnection, SqlTransaction, Task<TResult>> action
   )
   {
@@ -24,7 +24,11 @@ internal sealed class SqlConnector : ISqlConnector
 
     try
     {
-      return await action(connection, transaction);
+      var result = await action(connection, transaction);
+
+      transaction.Commit();
+
+      return result;
     }
     catch (Exception)
     {
@@ -46,21 +50,9 @@ internal sealed class SqlConnector : ISqlConnector
     CommandType? commandType = null
   )
   {
-    return UsingTransaction(
+    return QueryUsingTransaction(
       async (connection, transaction) =>
-      {
-        var result = await connection.QueryAsync<T>(
-          sql,
-          param,
-          transaction,
-          DefaultCommandTimeout,
-          commandType
-        );
-
-        transaction.Commit();
-
-        return result;
-      }
+        await connection.QueryAsync<T>(sql, param, transaction, DefaultCommandTimeout, commandType)
     );
   }
 
@@ -70,21 +62,15 @@ internal sealed class SqlConnector : ISqlConnector
     CommandType? commandType = null
   )
   {
-    return UsingTransaction(
+    return QueryUsingTransaction(
       async (connection, transaction) =>
-      {
-        var result = await connection.QuerySingleAsync<T>(
+        await connection.QuerySingleAsync<T>(
           sql,
           param,
           transaction,
           DefaultCommandTimeout,
           commandType
-        );
-
-        transaction.Commit();
-
-        return result;
-      }
+        )
     );
   }
 
@@ -94,21 +80,15 @@ internal sealed class SqlConnector : ISqlConnector
     CommandType? commandType = null
   )
   {
-    return UsingTransaction(
+    return QueryUsingTransaction(
       async (connection, transaction) =>
-      {
-        var result = await connection.QuerySingleOrDefaultAsync<T>(
+        await connection.QuerySingleOrDefaultAsync<T>(
           sql,
           param,
           transaction,
           DefaultCommandTimeout,
           commandType
-        );
-
-        transaction.Commit();
-
-        return result;
-      }
+        )
     );
   }
 }
