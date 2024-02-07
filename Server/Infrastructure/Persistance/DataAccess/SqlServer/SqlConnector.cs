@@ -35,7 +35,6 @@ internal sealed class SqlConnector : ISqlConnector
       try
       {
         transaction.Rollback();
-        throw;
       }
       catch (Exception)
       {
