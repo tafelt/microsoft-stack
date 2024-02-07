@@ -1,5 +1,21 @@
 version: '3.9'
 services:
+  nginx:
+    container_name: ${PROJECT}-nginx
+    platform: ${BUILD_PLATFORM}
+    image: nginx:${NGINX_VARIANT}
+    restart: unless-stopped
+    depends_on:
+      client:
+        condition: service_started
+      server:
+        condition: service_started
+    volumes:
+      - ./Nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - ${NGINX_PORT}:${NGINX_PORT}
+    networks:
+      - api-gateway
   client:
     container_name: ${PROJECT}-client
     platform: ${BUILD_PLATFORM}
@@ -7,6 +23,9 @@ services:
     build:
       context: ./Client
       dockerfile: ./.devcontainer/Dockerfile
+    depends_on:
+      server:
+        condition: service_started
     volumes:
       - ./Client/:/usr/src/Client
       - node_modules:/usr/src/Client/node_modules
@@ -24,8 +43,8 @@ services:
       context: ./Server
       dockerfile: ./.devcontainer/Dockerfile
     depends_on:
-      mssql:
-        condition: service_healthy
+      mssql-migration:
+        condition: service_started
     volumes:
       - ./Server/:/usr/src/Server
     ports:

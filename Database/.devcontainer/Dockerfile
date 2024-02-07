@@ -1,7 +1,5 @@
 FROM mcr.microsoft.com/devcontainers/dotnet:7.0
 
-USER vscode
-
 WORKDIR /usr/src/Database
 
 COPY --chown=vscode:vscode . .

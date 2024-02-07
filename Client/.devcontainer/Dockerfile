@@ -2,8 +2,6 @@ FROM node:21-alpine
 
 RUN apk add --no-cache bash
 
-USER node
-
 WORKDIR /usr/src/Client
 
 COPY ./package*.json ./

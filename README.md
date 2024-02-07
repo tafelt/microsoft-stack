@@ -31,6 +31,7 @@ This project presents the use of Microsoft technologies in VS Code `devcontainer
 - FYI
   - Database migrations are run automatically when you open any remote container
   - Server API endpoints can be accessed from `http://localhost:DOTNET_PORT/swagger`
+  - Client can be accessed from `http://localhost:NGINX_PORT`
 
 ## Known issues
 
