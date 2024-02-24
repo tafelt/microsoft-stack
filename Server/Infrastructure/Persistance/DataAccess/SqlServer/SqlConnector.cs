@@ -15,7 +15,7 @@ internal sealed class SqlConnector : ISqlConnector
     _sqlConnectionFactory = sqlConnectionFactory;
   }
 
-  private async Task<TResult> QueryUsingTransaction<TResult>(
+  private async Task<TResult> UsingTransaction<TResult>(
     Func<SqlConnection, SqlTransaction, Task<TResult>> action
   )
   {
@@ -40,6 +40,8 @@ internal sealed class SqlConnector : ISqlConnector
       {
         throw;
       }
+
+      throw;
     }
   }
 
@@ -49,7 +51,7 @@ internal sealed class SqlConnector : ISqlConnector
     CommandType? commandType = null
   )
   {
-    return QueryUsingTransaction(
+    return UsingTransaction(
       async (connection, transaction) =>
         await connection.QueryAsync<T>(sql, param, transaction, DefaultCommandTimeout, commandType)
     );
@@ -61,7 +63,7 @@ internal sealed class SqlConnector : ISqlConnector
     CommandType? commandType = null
   )
   {
-    return QueryUsingTransaction(
+    return UsingTransaction(
       async (connection, transaction) =>
         await connection.QuerySingleAsync<T>(
           sql,
@@ -79,7 +81,7 @@ internal sealed class SqlConnector : ISqlConnector
     CommandType? commandType = null
   )
   {
-    return QueryUsingTransaction(
+    return UsingTransaction(
       async (connection, transaction) =>
         await connection.QuerySingleOrDefaultAsync<T>(
           sql,

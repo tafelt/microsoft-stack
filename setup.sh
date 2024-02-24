@@ -5,7 +5,7 @@ read -p "Name the project (default: microsoft-stack) " PROJECT
 PROJECT=${PROJECT:-"microsoft-stack"}
 
 read -p "Are you using an Apple Silicon processor (y/n)? | skipping equals (n) " IS_USING_APPLE_SILICON
-if [[ ${IS_USING_APPLE_SILICON,,} == 'y' ]]
+if [[ $IS_USING_APPLE_SILICON == 'Y' ]] || [[ $IS_USING_APPLE_SILICON == 'y' ]]
 then
   BUILD_PLATFORM="linux/arm64/v8"
 else
@@ -34,8 +34,8 @@ MSSQL_APP_TEST_CONNECTION_STRING="Data Source=${MSSQL_DATA_SOURCE};Database=${MS
 # Server
 DOTNET_VARIANT="7.0"
 
-read -p "Set the server port number (default: 5000) " DOTNET_PORT
-export DOTNET_PORT=${DOTNET_PORT:-"5000"}
+read -p "Set the server port number (default: 4000) " DOTNET_PORT
+export DOTNET_PORT=${DOTNET_PORT:-"4000"}
 DOTNET_URLS="http://0.0.0.0:${DOTNET_PORT}"
 
 # Client

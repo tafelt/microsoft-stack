@@ -1,8 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Infrastructure.Persistance.DataAccess.Common;
+using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Persistance.DataAccess.SqlServer;
 
-public interface ISqlConnectionFactory
-{
-  Task<SqlConnection> GetOpenConnectionAsync();
-}
+public interface ISqlConnectionFactory : IDbConnectionFactory<SqlConnection> { }
