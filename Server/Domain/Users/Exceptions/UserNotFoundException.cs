@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Domain.Exceptions;
+using Domain.Common.Exceptions;
 
 namespace Domain.Users.Exceptions;
 

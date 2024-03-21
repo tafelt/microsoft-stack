@@ -1,4 +1,4 @@
-﻿namespace Domain.SeedWork;
+﻿namespace Domain.Common.SeedWork;
 
 public interface IRepository<T, TId>
   where T : class, IAggregateRoot

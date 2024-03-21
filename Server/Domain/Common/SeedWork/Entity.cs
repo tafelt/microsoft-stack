@@ -1,4 +1,4 @@
-﻿namespace Domain.SeedWork;
+﻿namespace Domain.Common.SeedWork;
 
 public abstract class Entity<TId> : IEquatable<Entity<TId>>
   where TId : notnull

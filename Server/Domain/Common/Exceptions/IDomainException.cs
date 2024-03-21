@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Domain.Exceptions;
+namespace Domain.Common.Exceptions;
 
 public interface IDomainException
 {

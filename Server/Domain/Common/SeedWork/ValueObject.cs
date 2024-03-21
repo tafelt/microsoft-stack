@@ -1,4 +1,4 @@
-﻿namespace Domain.SeedWork;
+﻿namespace Domain.Common.SeedWork;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
@@ -16,9 +16,9 @@ public abstract class ValueObject : IEquatable<ValueObject>
       return false;
     }
 
-    var valueObject = (ValueObject)obj;
+    var other = (ValueObject)obj;
 
-    return GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());
+    return GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
   }
 
   public static bool operator ==(ValueObject left, ValueObject right)
