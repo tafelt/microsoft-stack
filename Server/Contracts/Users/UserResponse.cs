@@ -1,3 +1,5 @@
-﻿namespace Contracts.Users;
+﻿using Domain.Users;
 
-public record UserResponse(int Id, string Name, string Email);
+namespace Contracts.Users;
+
+public record UserResponse(int Id, string Name, string Email, Address Address);

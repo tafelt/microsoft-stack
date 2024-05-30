@@ -1,7 +1,7 @@
 ﻿using Infrastructure.Services.Settings;
 using Microsoft.Data.SqlClient;
 
-namespace Infrastructure.Persistance.DataAccess.SqlServer;
+namespace Infrastructure.DataAccess.SqlServer;
 
 internal sealed class SqlConnectionFactory : ISqlConnectionFactory
 {

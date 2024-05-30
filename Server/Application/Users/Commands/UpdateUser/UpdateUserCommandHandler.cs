@@ -15,7 +15,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User>
 
   public async Task<User> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
   {
-    var user = new User(request.Id, request.Name, request.Email);
+    var user = new User(request.Id, request.Name, request.Email, request.Address);
 
     return await _userRepository.UpdateAsync(user) ?? throw new UserNotFoundException();
   }

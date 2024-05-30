@@ -1,15 +1,16 @@
 ﻿namespace Domain.Common.SeedWork;
 
-public interface IRepository<T, TId>
-  where T : class, IAggregateRoot
+public interface IRepository<TEntity, TId>
+  where TEntity : class, IAggregateRoot
+  where TId : notnull
 {
-  Task<IEnumerable<T>> GetAllAsync();
+  Task<IEnumerable<TEntity>> GetAllAsync();
 
-  Task<T?> GetByIdAsync(TId id);
+  Task<TEntity?> GetByIdAsync(TId id);
 
-  Task<T> CreateAsync(T entity);
+  Task<TEntity> CreateAsync(TEntity entity);
 
-  Task<T?> UpdateAsync(T entity);
+  Task<TEntity?> UpdateAsync(TEntity entity);
 
-  Task<T?> DeleteAsync(TId id);
+  Task<TEntity?> DeleteAsync(TId id);
 }

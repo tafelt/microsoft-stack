@@ -18,7 +18,7 @@ class Program
       {
         EnsureDatabaseExists(options.SystemConnectionString, options.Database);
 
-        using var serviceProvider = CreateServices(options.BaseConnectionString);
+        using var serviceProvider = CreateServices(options.AppConnectionString);
         using var scope = serviceProvider.CreateScope();
 
         RunMigrations(scope.ServiceProvider);
@@ -46,16 +46,13 @@ class Program
 
   private static void EnsureDatabaseExists(string connectionString, string database)
   {
-    var parameters = new DynamicParameters();
-    parameters.Add("name", database);
-
     using var connection = new SqlConnection(connectionString);
-
-    var records = connection.Query("SELECT * FROM sys.databases WHERE name = @name", parameters);
+    
+    var records = connection.Query("SELECT * FROM sys.databases WHERE name = @Database;", new { Database = database });
 
     if (!records.Any())
     {
-      connection.Execute($"CREATE DATABASE {database}");
+      connection.Execute($"CREATE DATABASE {database};");
     }
 
     connection.Close();

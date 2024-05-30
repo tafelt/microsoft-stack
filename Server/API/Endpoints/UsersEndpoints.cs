@@ -64,7 +64,8 @@ public class UsersEndpoints : ICarterModule
     {
       Id = id,
       Name = request.Name,
-      Email = request.Email
+      Email = request.Email,
+      Address = request.Address
     };
 
     var result = await sender.Send(command);

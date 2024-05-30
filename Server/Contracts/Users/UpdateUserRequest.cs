@@ -1,3 +1,5 @@
-﻿namespace Contracts.Users;
+﻿using Domain.Users;
 
-public record UpdateUserRequest(string Name, string Email);
+namespace Contracts.Users;
+
+public record UpdateUserRequest(string Name, string Email, Address Address);

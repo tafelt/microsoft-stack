@@ -1,6 +1,6 @@
 ﻿using Domain.Users;
-using Infrastructure.Persistance.DataAccess.SqlServer;
-using Infrastructure.Persistance.Repositories;
+using Infrastructure.DataAccess.SqlServer;
+using Infrastructure.Repositories;
 using Infrastructure.Services.Settings;
 using Microsoft.Extensions.DependencyInjection;
 
