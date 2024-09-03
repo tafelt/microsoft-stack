@@ -53,7 +53,7 @@ services:
     image: mcr.microsoft.com/mssql/server:${MSSQL_VARIANT}
     restart: unless-stopped
     healthcheck:
-      test: /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" || exit 1
+      test: /opt/mssql-tools18/bin/sqlcmd -N -C -S mssql,1433 -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" || exit 1
       interval: 5s
       timeout: 5s
       retries: 20
@@ -61,14 +61,14 @@ services:
     volumes:
       - mssql-data:/var/opt/mssql
     ports:
-      - ${MSSQL_TCP_PORT}:${MSSQL_TCP_PORT}
+      - ${MSSQL_TCP_PORT}:1433
     networks:
       - mssql-connection
     environment:
       - ACCEPT_EULA=${MSSQL_ACCEPT_EULA}
       - MSSQL_PID=${MSSQL_PID}
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
-      - MSSQL_TCP_PORT=${MSSQL_TCP_PORT}
+      - MSSQL_TCP_PORT=1433
   mssql-migration:
     container_name: ${PROJECT}-mssql-migration
     platform: ${BUILD_PLATFORM}

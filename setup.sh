@@ -18,7 +18,9 @@ MSSQL_ACCEPT_EULA="Y"
 MSSQL_PID="Developer"
 MSSQL_USER_ID="sa"
 MSSQL_DATA_SOURCE="mssql"
-MSSQL_TCP_PORT="1433"
+
+read -p "Set the MSSQL port number (default: 1433) " MSSQL_TCP_PORT
+MSSQL_TCP_PORT=${MSSQL_TCP_PORT:-"1433"}
 
 read -p "Set the MSSQL SA password (default: <YourStrong!Passw0rd>) " MSSQL_SA_PASSWORD
 MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD:-"<YourStrong!Passw0rd>"}
