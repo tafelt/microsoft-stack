@@ -1,4 +1,5 @@
 version: '3.9'
+name: ${PROJECT}
 services:
   nginx:
     container_name: ${PROJECT}-nginx
